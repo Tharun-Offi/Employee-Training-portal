@@ -16,7 +16,7 @@ uvicorn main:app --reload --port 8000
 ```
 
 ## Default Admin
-- Email: `admin@exampro.com`
+- Email: `admin@gmail.com`
 - Password: `Admin@123`
 
 ## API Docs

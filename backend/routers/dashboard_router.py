@@ -18,7 +18,8 @@ def my_dashboard(db: Session = Depends(get_db), current_user: User = Depends(get
     payments = db.query(Payment).filter(Payment.user_id == current_user.id, Payment.status == "paid").all()
 
     user_averages = []
-    for user in db.query(User).all():
+    # Only count employee accounts for ranking valuation (exclude admin accounts)
+    for user in db.query(User).filter(User.role == "employee").all():
         user_attempts = db.query(ExamAttempt).filter(ExamAttempt.user_id == user.id).all()
         average = sum(a.percentage for a in user_attempts) / len(user_attempts) if user_attempts else 0
         user_averages.append((user.id, average))
